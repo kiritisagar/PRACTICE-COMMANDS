@@ -77,19 +77,28 @@ docker network connect my-network <container_id>
 4.Disconnect a Container from a Network:
 docker network disconnect my-network <container_id>
 
-5.Volumes
-Create a Docker Volume:
+### docker volume ### 
+1.Create a Docker Volume:
 docker volume create my-volume
 
-6.List Docker Volumes:
+2.List Docker Volumes:
 docker volume ls
 
-7.Run a Container with a Volume:
-docker run -d -p 8080:80 -v my-volume:/usr/share/nginx/html my-nginx-image
-
-8.Remove a Volume
+3.Remove a Volume
 docker volume rm <volume_name>
 
+4.Inspecting Volumes:
+docker volume inspect my-volume
+
+5.Run a Container with a Volume:
+docker run -d -p 8080:80 -v my-volume:/usr/share/nginx/html my-nginx-image
+
+6.Mounting Volumes to Containers:
+Mount a Volume When Running a Container:
+docker run -d --name mycontainer -v mydata:/path/in/container myimage
+
+7.Bind Mount a Host Directory:
+docker run -d --name mycontainer -v /host/path:/container/path myimage
 
 ### Cleanup ###
 1.Remove All:
