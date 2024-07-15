@@ -1,5 +1,5 @@
 # Setup and Installation
-apt install docker
+apt install docker.io
 
 # Check Docker Version
 docker --version
@@ -15,6 +15,19 @@ docker pull httpd
 3.Remove an Image
 docker rmi <image_id>
 
+4. Search for docker image
+docker search image_name
+
+5. Create a docker image from a customized container
+docker commit container_name/container_id
+
+6.Push an Image to Docker Hub
+docker push <image_name>:<tag>
+
+7.Pull an Image from a Private Registry
+docker pull <private_registry>/<image_name>:<tag>
+
+
 ### Building Docker Images ###
 Create a Dockerfile:
 
@@ -24,6 +37,8 @@ COPY ./index.html /usr/share/nginx/html/index.html
 
 Build an Image from a Dockerfile:
 docker build -t my-nginx-image .
+
+
 
 ### Running and Managing Containers ###
 1.Run a Container in Detached Mode:
@@ -56,12 +71,24 @@ docker ps -a --filter "status=exited"
 10.Rename a Container
 docker rename <old_name> <new_name>
 
-11.Push an Image to Docker Hub
-docker push <image_name>:<tag>
+11.To delete a stopped container
+docker rm container_id/container_name
 
-12.Pull an Image from a Private Registry
-docker pull <private_registry>/<image_name>:<tag>
+12.To delete a running container
+docker rm -f container_id/container_name
 
+13.To Stop all running containers
+docker stop $(docker ps-q)
+
+14.To delete all stopped containers
+docker rm $(docker ps-q)
+docker container prune
+
+15.To delete all the containers stopped and running
+docker rm -f $(docker ps-aq)
+
+16.To enter into the container
+docker exec -it container_id/container_name/bin/bash or /bin/sh
 
 
 ### Networking ###
@@ -71,7 +98,7 @@ docker network ls
 2.Create a Custom Network:
 docker network create my-network
 
-3.Connect a Container to a Network:
+3.Connect a Container to a Network or to attach network to the container:
 docker network connect my-network <container_id>
 
 4.Disconnect a Container from a Network:
